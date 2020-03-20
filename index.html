@@ -18,6 +18,13 @@
 		<h1 class="display-1 text-center" id="question"></h1>
 		</div>
 
+		<form>
+			<div class="form-group">
+				<input class="form-control form-control-lg text-center" id="roman" type="text" placeholder="please enter the roman..">
+
+				<input class="btn btn-primary btn-lg btn-block" id="submit" onclick=getA() type="button" value="Submit">
+			</div>
+		</form>
 	</div>
 
     <!-- Optional JavaScript -->
@@ -27,11 +34,34 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
-		var table = $.getJSON("table.json")
-		var keys = Object.keys(table)
-		var idx = Math.floor(Math.random * keys.length)
-		var value = table[keys[idx]]
-		document.getElementById("question").innerHTML = keys[idx]
+		var val;
+
+		function putQ() {
+			$.getJSON('table.json', function(data) {
+				var idx = Math.floor(Object.keys(data).length * Math.random())
+				val = Object.values(data)[idx]
+				document.getElementById("question").innerHTML = Object.keys(data)[idx]
+			});
+		}
+
+		function getA() {
+			if (document.getElementById("submit").value == "Submit") {
+				var ans = document.getElementById("roman").value
+				if (ans == val) {
+					document.getElementById("roman").value = ""
+					putQ()
+				} else {
+					document.getElementById("question").innerHTML += "<br>" + val
+					document.getElementById("submit").value = "Next"
+				}
+			} else {
+				document.getElementById("submit").value = "Submit"
+				document.getElementById("roman").value = ""
+				putQ()
+			}
+		}
+
+		putQ()
 	</script>
 
 </body>
