@@ -20,7 +20,7 @@
 
 		<form>
 			<div class="form-group">
-				<input class="form-control form-control-lg text-center" id="roman" type="text" placeholder="please enter the roman..">
+				<input class="form-control form-control-lg text-center" id="roman" type="text" placeholder="please enter the roman.." autofocus>
 
 				<input class="btn btn-primary btn-lg btn-block" id="submit" onclick=getA() type="button" value="Submit">
 			</div>
@@ -46,7 +46,7 @@
 
 		function getA() {
 			if (document.getElementById("submit").value == "Submit") {
-				var ans = document.getElementById("roman").value
+				var ans = document.getElementById("roman").value.toLowerCase()
 				if (ans == val) {
 					document.getElementById("roman").value = ""
 					putQ()
@@ -60,6 +60,13 @@
 				putQ()
 			}
 		}
+
+		document.getElementById("roman").addEventListener("keypress", function(event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("submit").click();
+			}
+		});
 
 		putQ()
 	</script>
