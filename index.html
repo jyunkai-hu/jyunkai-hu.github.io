@@ -15,7 +15,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="jumbotron">
-		<h1 class="display-1 text-center" id="question"></h1>
+		<h1 class="text-center" id="question"></h1>
 		</div>
 
 		<form>
@@ -37,7 +37,7 @@
 		var val;
 
 		function putQ() {
-			$.getJSON('table.json', function(data) {
+			$.getJSON('hangul.json', function(data) {
 				var idx = Math.floor(Object.keys(data).length * Math.random())
 				val = Object.values(data)[idx]
 				document.getElementById("question").innerHTML = Object.keys(data)[idx]
