@@ -37,7 +37,7 @@
 		var val;
 
 		function putQ() {
-			$.getJSON('hangul.json', function(data) {
+			$.getJSON('hiragana.json', function(data) {
 				var idx = Math.floor(Object.keys(data).length * Math.random())
 				val = Object.values(data)[idx]
 				document.getElementById("question").innerHTML = Object.keys(data)[idx]
