@@ -13,6 +13,14 @@
     <title>Kana & Hangul Test</title>
 </head>
 <body>
+	<ul class="nav nav-tabs justify-content-center">
+		<li class="nav-item">
+			<a class="nav-link active" href="#" data-toggle="tab" onclick=setFname("hangul")>한글</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#" data-toggle="tab" onclick=setFname("kana")>仮名</a>
+		</li>
+	</ul>
 	<div class="container-fluid">
 		<div class="jumbotron">
 		<h1 class="text-center" id="question"></h1>
@@ -35,9 +43,11 @@
 
 	<script type="text/javascript">
 		var val;
+		var fname = 'hangul';
 
 		function putQ() {
-			$.getJSON('hiragana.json', function(data) {
+			console.log(fname+'.json')
+			$.getJSON(fname + '.json', function(data) {
 				var idx = Math.floor(Object.keys(data).length * Math.random())
 				val = Object.values(data)[idx]
 				document.getElementById("question").innerHTML = Object.keys(data)[idx]
@@ -67,6 +77,11 @@
 				document.getElementById("submit").click();
 			}
 		});
+
+		function setFname(name) {
+			fname = name
+			putQ()
+		}
 
 		putQ()
 	</script>
