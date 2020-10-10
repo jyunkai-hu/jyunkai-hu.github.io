@@ -22,8 +22,11 @@
 		</li>
 	</ul>
 	<div class="container-fluid">
+		<div class="form-group">
+			<input type="file" class="form-control-file" id="inputFile">
+		</div>
 		<div class="jumbotron">
-		<h1 class="text-center" id="question"></h1>
+			<h1 class="text-center" id="question"></h1>
 		</div>
 
 		<form>
@@ -43,11 +46,10 @@
 
 	<script type="text/javascript">
 		var val;
-		var fname = 'hangul';
+		var fname = 'hangul.json';
 
 		function putQ() {
-			console.log(fname+'.json')
-			$.getJSON(fname + '.json', function(data) {
+			$.getJSON(fname, function(data) {
 				var idx = Math.floor(Object.keys(data).length * Math.random())
 				val = Object.values(data)[idx]
 				document.getElementById("question").innerHTML = Object.keys(data)[idx]
@@ -57,7 +59,7 @@
 		function getA() {
 			if (document.getElementById("submit").value == "Submit") {
 				var ans = document.getElementById("roman").value.toLowerCase()
-				if (ans == val) {
+				if (ans == val.toLowerCase()) {
 					document.getElementById("roman").value = ""
 					putQ()
 				} else {
@@ -79,7 +81,13 @@
 		});
 
 		function setFname(name) {
-			fname = name
+			fname = name + '.json'
+			putQ()
+		}
+
+		document.getElementById('inputFile').onchange = function(evt) {
+			let f = evt.target.files[0];
+			fname  = window.URL.createObjectURL(f);
 			putQ()
 		}
 
